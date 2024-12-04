@@ -94,7 +94,7 @@ class ExplosionDialog(QDialog):
         self.setLayout(layout)
        
     def play_again(self):
-        pass
+        win.create()
     
     def stop(self):
         print("no")
