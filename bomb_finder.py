@@ -27,16 +27,19 @@ class Minefield(QWidget):
         boom = ExplosionDialog(self)
         boom.exec()
     
-    def __init__(self,butts):
+    def __init__(self,butts=9):
         super().__init__()
         self.lay = QGridLayout(self)
-        self.buttons = []
         self.lay.setContentsMargins(60,60,60,60)
         self.lay.setSpacing(15)
         self.bombdex = randint(0,butts-1)
         self.labl = QLabel(" ")
-        
+        self.buttongrid(butts)
+  
+    # arranges the buttons into grid
+    def buttongrid(self,butts=9):
         # adds specified amount of buttons
+        self.buttons = []
         for i in range(0,butts):
             self.buttons.append(QPushButton(f"O"))
             self.buttons[i].setCheckable(True)
@@ -47,11 +50,8 @@ class Minefield(QWidget):
                 self.buttons[i].toggled.connect(self.bomb)
                 self.buttons[i].setStyleSheet("background-color:red")
             else:
-                self.buttons[i].toggled.connect(self.testpress)    
-        self.buttongrid()
-  
-    # arranges the buttons into grid
-    def buttongrid(self):
+                self.buttons[i].toggled.connect(self.testpress)  
+                
         # figures out how best to arrange the grid
         row = 0
         stop = len(self.buttons)+1
@@ -84,38 +84,32 @@ class ExplosionDialog(QDialog):
         # connecting buttons to custom functions
        
         self.buttonBox.rejected.connect(self.stop)
-        self.buttonBox.accepted.connect(self.play)
-       
-        
+        self.buttonBox.accepted.connect(self.play_again)
+ 
         layout = QVBoxLayout()
         # maybe add counter of unpressed buttons later to display here
         message = QLabel("You found the bomb!\nWant to try again?")
         layout.addWidget(message)
         layout.addWidget(self.buttonBox)
         self.setLayout(layout)
-        
-        
-        
-        
-        
-    def play(self):
-        print("yes")
-        self.close()
+       
+    def play_again(self):
+        pass
     
     def stop(self):
         print("no")
         self.close()
         
     
-   
+    
+    
 
 # main stuff   
 grid = 9
-            
+
 app = QApplication(sys.argv)
+app.setStyleSheet(GLOBAL_STYLE)
 win = Minefield(grid)
 win.show()
-app.setStyleSheet(GLOBAL_STYLE)
 sys.exit(app.exec())
-
             
