@@ -4,8 +4,10 @@
 # (like those crocodile teeth games. or just russian roulette)
 
 
-from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QGridLayout, QLabel
-from PyQt6.QtCore import Qt
+from PyQt6.QtGui import *
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
+
 import sys
 from random import *
 from math import *
@@ -21,17 +23,10 @@ class Minefield(QWidget):
            
     def bomb(self):
         bu = self.sender()
-        print(bu)
         bu.setEnabled(False)
-        bu.setText("Boom")
-        bu.setStyleSheet("color:red")
-        self.labl.setText("Boom")
-        
-        self.ende()
-        
-    def ende(self,tic=.2):
-        sleep(tic)
-        self.close()
+        self.win2 = Explosion()
+        self.win2.show()
+      
     
     def __init__(self,butts):
         super().__init__()
@@ -80,10 +75,18 @@ class Minefield(QWidget):
         self.lay.addWidget(self.labl,lbrow,lbcol)       
         self.labl.setAlignment(Qt.AlignmentFlag.AlignHCenter)
 
-class Explosion(QWidget):
+class Explosion(QMainWindow):
     def __init__(self):
         super().__init__()
+        # layout = QGridLayout(self)
         boom = QLabel(self)
+        boom.setPixmap(QPixmap('explosion.png'))
+        boom.setScaledContents(True)
+        # layout.addWidget(boom)
+        # self.setContentsMargins(10,10,10,10)
+        self.setFixedSize(400,400)
+        self.setCentralWidget(boom)
+       
         
 
 # main stuff   
