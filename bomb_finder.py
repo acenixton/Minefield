@@ -24,9 +24,8 @@ class Minefield(QWidget):
     def bomb(self):
         bu = self.sender()
         bu.setEnabled(False)
-        self.win2 = Explosion()
-        self.win2.show()
-      
+        boom = ExplosionDialog(self)
+        boom.exec()
     
     def __init__(self,butts):
         super().__init__()
@@ -75,19 +74,40 @@ class Minefield(QWidget):
         self.lay.addWidget(self.labl,lbrow,lbcol)       
         self.labl.setAlignment(Qt.AlignmentFlag.AlignHCenter)
 
-class Explosion(QMainWindow):
-    def __init__(self):
+class ExplosionDialog(QDialog):
+    def __init__(self, parent=None):
         super().__init__()
-        # layout = QGridLayout(self)
-        boom = QLabel(self)
-        boom.setPixmap(QPixmap('explosion.png'))
-        boom.setScaledContents(True)
-        # layout.addWidget(boom)
-        # self.setContentsMargins(10,10,10,10)
-        self.setFixedSize(400,400)
-        self.setCentralWidget(boom)
+        self.setWindowTitle("BOOM!")
+        # adds buttons from standard selection, Qt handles order
+        buttons = QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel
+        self.buttonBox = QDialogButtonBox(buttons)
+        # connecting buttons to custom functions
+       
+        self.buttonBox.rejected.connect(self.stop)
+        self.buttonBox.accepted.connect(self.play)
        
         
+        layout = QVBoxLayout()
+        # maybe add counter of unpressed buttons later to display here
+        message = QLabel("You found the bomb!\nWant to try again?")
+        layout.addWidget(message)
+        layout.addWidget(self.buttonBox)
+        self.setLayout(layout)
+        
+        
+        
+        
+        
+    def play(self):
+        print("yes")
+        self.close()
+    
+    def stop(self):
+        print("no")
+        self.close()
+        
+    
+   
 
 # main stuff   
 grid = 9
