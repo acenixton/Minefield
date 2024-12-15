@@ -20,7 +20,7 @@ class Minefield(QWidget):
         bu = self.sender()
         bu.setEnabled(False)
         bu.setText("")
-           
+
     def bomb(self):
         bu = self.sender()
         bu.setEnabled(False)
@@ -35,7 +35,7 @@ class Minefield(QWidget):
         self.bombdex = randint(0,butts-1)
         self.labl = QLabel(" ")
         self.buttongrid(butts)
-  
+
     # arranges the buttons into grid
     def buttongrid(self,butts=9):
         # adds specified amount of buttons
@@ -82,17 +82,17 @@ class ExplosionDialog(QDialog):
         buttons = QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel
         self.buttonBox = QDialogButtonBox(buttons)
         # connecting buttons to custom functions
-       
+
         self.buttonBox.rejected.connect(self.stop)
         self.buttonBox.accepted.connect(self.play_again)
- 
+
         layout = QVBoxLayout()
         # maybe add counter of unpressed buttons later to display here
         message = QLabel("You found the bomb!\nWant to try again?")
         layout.addWidget(message)
         layout.addWidget(self.buttonBox)
         self.setLayout(layout)
-       
+
     def play_again(self):
         pass
     
