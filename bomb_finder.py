@@ -27,17 +27,6 @@ class Minefield(QWidget):
         bu = self.sender()
         bu.setEnabled(False)
         bu.setText("")
-<<<<<<< Updated upstream
-           
-    def bomb(self):
-        bu = self.sender()
-        bu.setEnabled(False)
-        self.win2 = Explosion()
-        self.win2.show()
-      
-    
-    def __init__(self,butts):
-=======
         self.counter += 1
 
     # opens explosion dialogue if bomb is triggered
@@ -48,7 +37,6 @@ class Minefield(QWidget):
         self.boom.exec()
     
     def __init__(self, size):
->>>>>>> Stashed changes
         super().__init__()
         self.setWindowTitle("Find the mine!")
         self.setWindowIcon(QIcon('bombicon.png'))
@@ -62,14 +50,9 @@ class Minefield(QWidget):
         
     def set_bombdex(self, butts):
         self.bombdex = randint(0,butts-1)
-<<<<<<< Updated upstream
-        self.labl = QLabel(" ")
-        
-=======
         
     # arranges the buttons into grid
     def set_buttongrid(self,butts):
->>>>>>> Stashed changes
         # adds specified amount of buttons
         for i in range(0,butts):
             self.buttons.append(QPushButton(f"o"))
@@ -80,16 +63,8 @@ class Minefield(QWidget):
             if i == self.bombdex:
                 self.buttons[i].toggled.connect(self.bomb)
             else:
-<<<<<<< Updated upstream
-                self.buttons[i].toggled.connect(self.testpress)    
-        self.buttongrid()
-  
-    # arranges the buttons into grid
-    def buttongrid(self):
-=======
                 self.buttons[i].toggled.connect(self.no_bomb)  
                 
->>>>>>> Stashed changes
         # figures out how best to arrange the grid
         row = 0
         stop = len(self.buttons)+1
@@ -107,32 +82,6 @@ class Minefield(QWidget):
                 self.lay.addWidget(self.buttons[k],i,j)
                 k += 1
 
-<<<<<<< Updated upstream
-class Explosion(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        # layout = QGridLayout(self)
-        boom = QLabel(self)
-        boom.setPixmap(QPixmap('explosion.png'))
-        boom.setScaledContents(True)
-        # layout.addWidget(boom)
-        # self.setContentsMargins(10,10,10,10)
-        self.setFixedSize(400,400)
-        self.setCentralWidget(boom)
-       
-        
-
-# main stuff   
-grid = 9
-            
-app = QApplication(sys.argv)
-win = Minefield(grid)
-win.show()
-app.setStyleSheet(GLOBAL_STYLE)
-sys.exit(app.exec())
-
-            
-=======
 class ExplosionDialog(QDialog):
     def __init__(self, parent):
         super().__init__()
@@ -226,4 +175,3 @@ app.setStyleSheet(GLOBAL_STYLE)
 win = Startmenu()
 win.show()
 sys.exit(app.exec())
->>>>>>> Stashed changes
