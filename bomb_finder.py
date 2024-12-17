@@ -12,6 +12,19 @@ import sys
 from random import *
 from math import *
 
+## necessary to get icon images in executable
+import os
+import sys
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+##############################################
+
 GLOBAL_STYLE = """QPushButton[checkable="true"] {color: grey; background-color: white; font: bold 14px}
                     QLabel {font: 20px}
                     QPushButton {font: 16px}
@@ -39,7 +52,7 @@ class Minefield(QWidget):
     def __init__(self, size):
         super().__init__()
         self.setWindowTitle("Find the mine!")
-        self.setWindowIcon(QIcon('bombicon.png'))
+        self.setWindowIcon(QIcon(resource_path("bombicon.png")))
         self.counter = 1
         self.lay = QGridLayout(self)
         self.buttons = []
@@ -86,7 +99,7 @@ class ExplosionDialog(QDialog):
     def __init__(self, parent):
         super().__init__()
         self.setWindowTitle("BOOM!")
-        self.setWindowIcon(QIcon('explosion.png'))
+        self.setWindowIcon(QIcon(resource_path("explosion.png")))
         # adds buttons from standard selection, Qt handles order
         buttons = QDialogButtonBox.StandardButton.Yes | QDialogButtonBox.StandardButton.No
         self.buttonBox = QDialogButtonBox(buttons)
