@@ -131,7 +131,7 @@ class Startmenu(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Welcome to the minefield!")
-        self.setWindowIcon(QIcon('bombicon.png'))
+        self.setWindowIcon(QIcon(resource_path("bombicon.png")))
         self.setFixedSize(350,350)
         text = QLabel(parent=self,text="Choose how big the field should be.")
         self.layouts = QVBoxLayout(self)
